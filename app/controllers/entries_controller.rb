@@ -4,6 +4,10 @@ class EntriesController < ApplicationController
     @entries = Entry.all
   end
 
+  def show
+    @entry = Entry.find_by_id(params[:id])
+  end
+
   def new
     @entry = Entry.new
   end
@@ -16,6 +20,26 @@ class EntriesController < ApplicationController
     else
       render('new')
     end
+  end
+
+  def edit
+    @entry = Entry.find_by_id(params[:id])
+  end
+
+  def update
+    @entry = Entry.find_by_id(params[:id])
+    if @entry.update(entry_params)
+      flash[:notice] = "Updated!!!!"
+      redirect_to(action: 'show', id: "#{@entry.id}")
+    else
+      render('edit')
+    end
+  end
+
+  def destroy
+    Entry.find_by_id(params[:id]).destroy
+    flash[:notice] = "Deleted!"
+    redirect_to(action: 'index')
   end
 
   private

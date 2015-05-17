@@ -1,0 +1,16 @@
+<%= link_to("Back to index", {action: 'index'}) %>
+<% if !flash[:notice].blank? %>
+    <%= flash[:notice] %>
+  <% end %>
+<table class="center">
+  <tr>
+    <th>
+      <%= @entry.name %>
+    </th>
+    <td><%= @entry.amount %></td>
+    <td><%= @entry.created_at.strftime("on %m/%d/%Y") %></td>
+    <td><%= link_to("Edit", {action: 'edit', id: @entry.id}) %></td>
+    <td><%= link_to("Delete!", {action: 'destroy', id: @entry.id}) %></td>
+  </tr>
+
+</table>

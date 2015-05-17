@@ -1,0 +1,5 @@
+<%= form_for(:entry, url: {action: 'update', id: @entry.id}) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_field :amount %>
+  <%= submit_tag("Submit") %>
+<% end %>

@@ -47,4 +47,16 @@
     </tr>
   </table>
 
+  <p>Your past entries</p>
+  <% @entries.each do |entry| %>
+    <table class="center">
+      <tr>
+        <th>
+          <%= link_to(entry.name, {action: 'show', id: entry.id}) %>
+        </th>
+        <td><%= entry.amount %></td>
+        <td><%= entry.created_at.strftime("on %m/%d/%Y") %></td>
+      </tr>
+    </table>
+  <% end %>
 </div>
