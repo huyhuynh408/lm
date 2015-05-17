@@ -1,15 +1,50 @@
-<% if !flash[:notice].blank? %>
-  <%= flash[:notice] %>
-<% end %>
+<div class="container">
+  <% if !flash[:notice].blank? %>
+    <%= flash[:notice] %>
+  <% end %>
+  <p>How much did you spend on lunch today?</p>
+  <%= form_for(:entry, url: {action: 'create'}) do |f| %>
+    <%= f.text_field :name, placeholder: 'Description' %>
+    <%= f.text_field :amount, placeholder: 'Amount' %>
+    <%= submit_tag("Submit") %>
+  <% end %>
 
+  <% total_amount = 0 %>
+  <% @entries.each do |entry| %>
+    <% total_amount += entry.amount %>
+  <% end %>
+  <table class="center m-top-lg f-lg" >
+    <tr>
+      <th>You spent today</th>
+      <td><%= @entries.last.amount %></td>
+    </tr>
+    <tr>
+      <th>Your budget for today</th>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th class="b-top">Difference</th>
+      <td class="b-top"><%= @entries.last.amount - 20 %></td>
+    </tr>
+  </table>
+  <table class="center m-top-lg f-lg">
+    <tr>
+      <th>Total days</th>
+      <td><%= @entries.length %></td>
+    </tr>
+    <tr>
+    <tr>
+      <th>Total spent</th>
+      <td><%= total_amount %></td>
+    </tr>
+    <tr>
+      <th>Total budget</th>
+      <td><%= @entries.length * 20 %></td>
+    </tr>
+    <tr>
+      <th class="b-top">Total difference</th>
+      <td class="b-top"><%= total_amount - (@entries.length * 20) %></td>
+    </tr>
+  </table>
 
-<%= form_for(:entry, url: {action: 'create'}) do |f| %>
-  <%= f.text_field :name, placeholder: 'Name' %>
-  <%= f.text_field :amount, placeholder: 'Amount' %>
-  <%= submit_tag("Submit") %>
-<% end %>
-
-
-<% @entries.each do |entry| %>
-  <p><%= entry.name %></p>
-<% end %>
+</div>
