@@ -1,0 +1,15 @@
+<% if !flash[:notice].blank? %>
+  <%= flash[:notice] %>
+<% end %>
+
+
+<%= form_for(:entry, url: {action: 'create'}) do |f| %>
+  <%= f.text_field :name, placeholder: 'Name' %>
+  <%= f.text_field :amount, placeholder: 'Amount' %>
+  <%= submit_tag("Submit") %>
+<% end %>
+
+
+<% @entries.each do |entry| %>
+  <p><%= entry.name %></p>
+<% end %>
